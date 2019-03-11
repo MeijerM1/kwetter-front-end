@@ -1,0 +1,14 @@
+<h1>All users</h1>
+<mat-divider></mat-divider>
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let user of users">
+    <mat-expansion-panel-header>
+      <mat-panel-title>{{user.username}}</mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-list>
+      <mat-list-item> {{user.description}} </mat-list-item>
+      <mat-list-item> {{user.location}} </mat-list-item>
+      <mat-list-item> <a mat-stroked-button href="{{user.websiteUrl}}"> To websites</a> </mat-list-item>
+    </mat-list>
+  </mat-expansion-panel>
+</mat-accordion>
