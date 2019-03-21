@@ -1,0 +1,24 @@
+<mat-card>
+  <mat-card-title>Register</mat-card-title>
+  <form class="login-container">
+    <mat-form-field>
+      <input matInput type="text" required placeholder="username" [(ngModel)]="user.username" name="username">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" required placeholder="avatar url" [(ngModel)]="user.avatarUrl" name="avatarUrl">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" required placeholder="description" [(ngModel)]="user.description" name="description">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" required placeholder="location" [(ngModel)]="user.location" name="location">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" required placeholder="website" [(ngModel)]="user.websiteUrl" name="websiteUrl">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="password" required placeholder="password" [(ngModel)]="user.password" name="password">
+    </mat-form-field>
+    <button mat-raised-button (click)="register()" type="submit" color="primary">Register</button>
+  </form>
+</mat-card>

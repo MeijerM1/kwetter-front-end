@@ -1,0 +1,10 @@
+<h1>Welcome to Kwetter</h1>
+<div class="search-bar">
+  <form #searchForm class="search-form">
+    <mat-form-field class="search-field">
+      <input [(ngModel)]="searchQuery" name="search" matInput placeholder="Search">
+    </mat-form-field>
+    <button (click)='search()' mat-stroked-button>Search</button>
+  </form>
+  <mat-divider></mat-divider>
+</div>
