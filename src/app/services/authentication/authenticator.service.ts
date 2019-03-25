@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import {UserDto} from '../../domain/UserDto';
 import {HttpClient} from '@angular/common/http';
 import { Response } from '../../domain/Response';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticatorService {
 
-  private loginUrl = 'http://localhost:8080/api/user/login';
+  private loginUrl = environment.API_BASE + '/user/login';
   public currentUser: UserDto;
 
   constructor(private http: HttpClient) { }

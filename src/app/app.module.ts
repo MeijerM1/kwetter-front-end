@@ -12,7 +12,8 @@ import {MatButtonModule,
     MatCardModule,
     MatSnackBarModule,
     MatIconModule,
-    MatTabsModule} from '@angular/material';
+    MatTabsModule,
+    MatDialogModule} from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +25,7 @@ import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { TweetComponent } from './components/tweet/tweet.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     SearchComponent,
     LoginComponent,
     RegisterComponent,
-    ProfileComponent
+    ProfileComponent,
+    TweetComponent
   ],
   imports: [
     BrowserModule,
@@ -52,9 +55,11 @@ import { ProfileComponent } from './components/profile/profile.component';
     MatCardModule,
     MatSnackBarModule,
     MatIconModule,
-    MatTabsModule
+    MatTabsModule,
+    MatDialogModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [TweetComponent]
 })
 export class AppModule { }
