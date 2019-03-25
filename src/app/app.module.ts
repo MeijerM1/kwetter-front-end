@@ -11,7 +11,8 @@ import {MatButtonModule,
     MatFormFieldModule,
     MatCardModule,
     MatSnackBarModule,
-    MatIconModule} from '@angular/material';
+    MatIconModule,
+    MatTabsModule} from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,6 +23,7 @@ import { SearchComponent } from './components/search/search.component';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { RegisterComponent } from './components/register/register.component';
     HomeComponent,
     SearchComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +51,8 @@ import { RegisterComponent } from './components/register/register.component';
     MatFormFieldModule,
     MatCardModule,
     MatSnackBarModule,
-    MatIconModule
+    MatIconModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

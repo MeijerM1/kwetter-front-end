@@ -10,7 +10,7 @@ import { Tweet } from 'src/app/domain/Tweet';
 })
 export class SearchComponent implements OnInit {
 
-  private searchQuery: string; 
+  private searchQuery: string;
   tweets: Tweet[];
 
   constructor(private route: ActivatedRoute, private tweetService: TweetService) { }

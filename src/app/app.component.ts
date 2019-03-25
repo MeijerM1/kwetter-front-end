@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticatorService} from './services/authentication/authenticator.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,17 +10,22 @@ import {AuthenticatorService} from './services/authentication/authenticator.serv
 export class AppComponent implements OnInit{
   title = 'kwetter';
 
-  constructor(private authService: AuthenticatorService) {}
+  constructor(private authService: AuthenticatorService, private router: Router) {}
 
   ngOnInit() {
     if(this.authService.isAuthenticated()) {
-      this.authService.setCurrenUser(this.authService.getCUrrentUser());
+      this.authService.setCurrenUser(this.authService.getCurrentUser());
     }
   }
 
   logout() {
     this.authService.logout();
+    this.router.navigateByUrl('/');
     window.location.reload();
+  }
+
+  viewProfile() {
+
   }
 
 }

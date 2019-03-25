@@ -20,6 +20,14 @@ export class AuthenticatorService {
     return this.http.post<Response>(this.loginUrl, user);
   }
 
+  public isCurrentUser(id: string) {
+    if (!this.currentUser) {
+      return false;
+    } else {
+      return this.currentUser.uuid === id;
+    }
+  }
+
   public isAuthenticated(): boolean {
     if (!localStorage.getItem('currentUser')) {
       return false;
@@ -33,7 +41,7 @@ export class AuthenticatorService {
     this.currentUser = user;
   }
 
-  public getCUrrentUser(): UserDto {
+  public getCurrentUser(): UserDto {
     return JSON.parse(localStorage.getItem('currentUser'));
   }
 

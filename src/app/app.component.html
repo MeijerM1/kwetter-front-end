@@ -3,11 +3,10 @@
   <a mat-button routerLink="/" routerLinkActive="active">Kwetter</a>
   <a mat-button routerLink="/users" routerLinkActive="active">Users</a>
   <span class="example-spacer"></span>
-  <span *ngIf="authService.currentUser">{{authService.currentUser.username}}</span>
+  <a mat-button routerLink="/profile/{{authService.getCurrentUser().uuid}}" routerLinkActive="active" *ngIf="authService.currentUser">{{authService.currentUser.username}}</a>
   <a mat-button routerLink="/login" routerLinkActive="active" *ngIf="!authService.currentUser">Login</a>
   <a mat-button (click)="logout()" *ngIf="authService.currentUser">Logout</a>
 </mat-toolbar>
 <div class="content">
   <router-outlet></router-outlet>
 </div>
-<span class="example-spacer"></span>
