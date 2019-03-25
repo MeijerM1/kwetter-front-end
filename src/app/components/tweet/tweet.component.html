@@ -1,0 +1,10 @@
+<div mat-dialog-content>
+  <p>What's on your mind?</p>
+  <mat-form-field>
+    <input matInput placeholder="cool story bro" type="text"  [(ngModel)]="tweet.content">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Close</button>
+  <button mat-button (click)="postTweet()" cdkFocusInitial>Post</button>
+</div>
