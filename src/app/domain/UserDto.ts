@@ -7,12 +7,16 @@ export class UserDto {
   public websiteUrl: string;
   public password: string;
   public roleUuid: string;
-  public foolowing: string[];
+  public following: string[] = [];
 
   constructor();
 
   constructor(username?: string, password?: string) {
     this.username = username;
     this.password = password;
+  }
+
+  public addFollower(id: string) {
+    this.following.push(id);
   }
 }
