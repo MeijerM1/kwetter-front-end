@@ -5,6 +5,7 @@
   <span class="example-spacer"></span>
   <a mat-button (click)="postTweet()" color="secondary" *ngIf="authService.currentUser">Post tweet</a>
   <a mat-button routerLink="/profile/{{authService.getCurrentUser().uuid}}" routerLinkActive="active" *ngIf="authService.currentUser">{{authService.currentUser.username}}</a>
+  <a mat-button routerLink="/register" routerLinkActive="active" *ngIf="!authService.currentUser">Register</a>
   <a mat-button routerLink="/login" routerLinkActive="active" *ngIf="!authService.currentUser">Login</a>
   <a mat-button (click)="logout()" *ngIf="authService.currentUser">Logout</a>
 </mat-toolbar>

@@ -22,6 +22,10 @@ export class TweetService {
     return this.http.get<Response>(`${this.baseUrl}/${uuid}/tweets`);
   }
 
+  public getUserTimeline(uuid: string) {
+    return this.http.get<Response>(`${this.baseUrl}/timeline/${uuid}`);
+  }
+
   public postTweet(tweet: Tweet) {
     return this.http.post(this.baseUrl, tweet);
   }

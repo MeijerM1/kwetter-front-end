@@ -1,4 +1,14 @@
 <h1>All users</h1>
+
+<div class="search-bar">
+  <form #searchForm class="search-form">
+    <mat-form-field class="search-field">
+      <input (input)="search()" [(ngModel)]='searchQuery' [ngModelOptions]="{standalone: true}" matInput
+             placeholder="Search">
+    </mat-form-field>
+  </form>
+  <mat-divider></mat-divider>
+</div>
 <mat-divider></mat-divider>
 <mat-accordion>
   <mat-expansion-panel *ngFor="let user of users">
@@ -8,8 +18,12 @@
     <mat-list>
       <mat-list-item> {{user.description}} </mat-list-item>
       <mat-list-item> {{user.location}} </mat-list-item>
-      <mat-list-item> <a mat-stroked-button routerLink="/profile/{{user.uuid}}"> To profile</a> </mat-list-item>
-      <mat-list-item> <a mat-stroked-button (click)="followUser(user.uuid)"> Follow</a> </mat-list-item>
+      <mat-list-item>
+        <div class="action-button-container">
+          <a mat-stroked-button routerLink="/profile/{{user.uuid}}">Profile</a>
+          <a mat-stroked-button (click)="followUser(user.uuid)"> Follow</a>
+        </div>
+      </mat-list-item>
     </mat-list>
   </mat-expansion-panel>
 </mat-accordion>

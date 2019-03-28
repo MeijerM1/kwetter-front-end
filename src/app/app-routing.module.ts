@@ -6,6 +6,8 @@ import { SearchComponent } from './components/search/search.component';
 import {LoginComponent} from './components/login/login.component';
 import {RegisterComponent} from './components/register/register.component';
 import {ProfileComponent} from './components/profile/profile.component';
+import {LoggedInAuthAccess} from './router/LoggedInAuthAccess';
+import {UnauthComponent} from './components/unauth/unauth.component';
 
 const routes: Routes = [
   {
@@ -13,8 +15,13 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
+    path: 'unauthorised',
+    component: UnauthComponent
+  },
+  {
     path: 'users',
-    component: UserComponent
+    component: UserComponent,
+    canActivate: [LoggedInAuthAccess]
   },
   {
     path: 'search/:query',
@@ -30,7 +37,8 @@ const routes: Routes = [
   },
   {
     path: 'profile/:id',
-    component: ProfileComponent
+    component: ProfileComponent,
+    canActivate: [LoggedInAuthAccess]
   }
 ];
 

@@ -25,6 +25,8 @@ import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import {LoggedInAuthAccess} from './router/LoggedInAuthAccess';
+import { UnauthComponent } from './components/unauth/unauth.component';
 import { TweetComponent } from './components/tweet/tweet.component';
 
 @NgModule({
@@ -36,7 +38,8 @@ import { TweetComponent } from './components/tweet/tweet.component';
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
-    TweetComponent
+    TweetComponent,
+    UnauthComponent
   ],
   imports: [
     BrowserModule,
@@ -58,8 +61,8 @@ import { TweetComponent } from './components/tweet/tweet.component';
     MatTabsModule,
     MatDialogModule
   ],
-  providers: [],
-  bootstrap: [AppComponent],
-  entryComponents: [TweetComponent]
+  entryComponents: [TweetComponent],
+  providers: [LoggedInAuthAccess],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -23,7 +23,7 @@ export class SearchComponent implements OnInit {
   }
 
   public search() {
-    if(this.searchQuery === '') {
+    if (this.searchQuery === '') {
       this.tweets = [];
       return;
     }
@@ -33,8 +33,7 @@ export class SearchComponent implements OnInit {
     this.tweetService.search(this.searchQuery).subscribe((response) => {
       console.log(response)
       this.tweets = response.payload;
-    })
-
+    });
   }
 
 }

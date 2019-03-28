@@ -11,18 +11,27 @@ import {AuthenticatorService} from '../../services/authentication/authenticator.
 export class UserComponent implements OnInit {
 
   private users: UserDto[];
+  private searchQuery: string;
 
   constructor(private userService: UserServiceService, private authService: AuthenticatorService) { }
 
   ngOnInit() {
-    this.userService.getAllUsers()
-    .subscribe((response: any) => {
-      this.users = response.payload;
-    });
   }
 
   followUser(id: string) {
     this.authService.currentUser.following.push(id);
     this.userService.update(this.authService.currentUser).subscribe();
   }
+
+  public search() {
+    if (this.searchQuery === '') {
+      this.users = [];
+      return;
+    }
+
+    this.userService.search(this.searchQuery).subscribe((response) => {
+      this.users = response.payload;
+    });
+  }
+
 }

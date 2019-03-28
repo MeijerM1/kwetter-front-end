@@ -36,4 +36,8 @@ export class UserServiceService {
   public getById(id: string) {
     return this.http.get<Response>(`${this.baseUrl}/${id}`);
   }
+
+  public search(query: string) {
+    return this.http.get<Response>(`${this.baseUrl}?name=${query}`);
+  }
 }

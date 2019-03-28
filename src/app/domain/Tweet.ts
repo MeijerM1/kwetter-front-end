@@ -4,7 +4,8 @@ export class Tweet {
   date: string;
   authorUuid: string;
 
-  constructor(uuid: string, content: string, date: string, authorUuid: string) {
+  constructor();
+  constructor(uuid?: string, content?: string, date?: string, authorUuid?: string) {
     this.uuid = uuid;
     this.content = content;
     this.date = date;
