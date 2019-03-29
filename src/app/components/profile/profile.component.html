@@ -1,4 +1,4 @@
-<mat-tab-group>
+<mat-tab-group mat-stretch-tabs [(selectedIndex)]="selectedTab">
   <mat-tab label="Profile">
     <mat-card *ngIf="user" class="profile-container">
       <mat-card-title>{{user.username}}</mat-card-title>
@@ -42,18 +42,20 @@
     </mat-card>
   </mat-tab>
   <mat-tab label="Followers">
-    <div *ngIf="followers">
+    <div *ngIf="followers" class="follow-container">
       <mat-list>
         <mat-list-item *ngIf="followers.length === 0">You don't have any followers :(</mat-list-item>
-        <mat-list-item *ngFor="let user of followers">{{user.username}}</mat-list-item>
+        <mat-list-item routerLink="/profile/{{user.uuid}}" *ngFor="let user of followers">{{user.username}}</mat-list-item>
+        <mat-divider></mat-divider>
       </mat-list>
     </div>
   </mat-tab>
   <mat-tab label="Following">
-    <div *ngIf="following">
+    <div *ngIf="following" class="follow-container">
       <mat-list>
         <mat-list-item *ngIf="following.length === 0">You are not following anyone :(</mat-list-item>
-        <mat-list-item *ngFor="let user of following">{{user.username}}</mat-list-item>
+        <mat-list-item routerLink="/profile/{{user.uuid}}" *ngFor="let user of following">{{user.username}}</mat-list-item>
+        <mat-divider></mat-divider>
       </mat-list>
     </div>
   </mat-tab>

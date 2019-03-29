@@ -28,6 +28,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import {LoggedInAuthAccess} from './router/LoggedInAuthAccess';
 import { UnauthComponent } from './components/unauth/unauth.component';
 import { TweetComponent } from './components/tweet/tweet.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { TweetComponent } from './components/tweet/tweet.component';
     RegisterComponent,
     ProfileComponent,
     TweetComponent,
-    UnauthComponent
+    UnauthComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
