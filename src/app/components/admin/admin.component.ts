@@ -12,7 +12,7 @@ import {MatSnackBar} from "@angular/material";
 })
 export class AdminComponent implements OnInit {
 
-  private searchQuery: string = 'user';
+  private searchQuery: string;
   private users: User[] = [];
   private roles: Role[] = [];
 
@@ -21,7 +21,6 @@ export class AdminComponent implements OnInit {
               private snackbar: MatSnackBar) { }
 
   ngOnInit() {
-    this.search();
     this.getRoles();
   }
 
@@ -42,7 +41,7 @@ export class AdminComponent implements OnInit {
   }
 
   update(uuid: string) {
-    let user = this.users.find(u => u.uuid === uuid);
+    const user = this.users.find(u => u.uuid === uuid);
     console.log(user);
     this.userService.update(user).subscribe(() => {
       this.snackbar.open('User updated', 'dismiss', {

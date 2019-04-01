@@ -2,6 +2,7 @@
 <mat-toolbar color="primary" class="kt-navbar">
   <a mat-button routerLink="/" routerLinkActive="active">Kwetter</a>
   <a mat-button routerLink="/users" routerLinkActive="active">Users</a>
+  <a mat-button routerLink="/admin" routerLinkActive="active">Admin</a>
   <span class="example-spacer"></span>
   <a mat-button (click)="postTweet()" color="secondary" *ngIf="authService.currentUser">Post tweet</a>
   <a mat-button routerLink="/profile/{{authService.getCurrentUser().uuid}}" routerLinkActive="active" *ngIf="authService.currentUser">{{authService.currentUser.username}}</a>

@@ -7,7 +7,6 @@ import {RoleService} from '../services/role/role.service';
 @Injectable()
 export class RoleGuard implements CanActivate {
   constructor(
-    // declare variables
     private authService: AuthenticatorService,
     private router: Router,
     public roleService: RoleService
@@ -23,7 +22,14 @@ export class RoleGuard implements CanActivate {
 
     const expectedRole = route.data.expectedRole;
 
-    return this.roleService.checkRole(this.authService.currentUser.roleUuid, expectedRole);
-
+    const bool = this.roleService.checkRole(this.authService.currentUser.roleUuid, expectedRole).toPromise();
+    return bool.then((result) => {
+      if (!result) {
+        this.router.navigateByUrl('/unauthorised');
+      } else {
+        console.log('we good')
+        return true;
+      }
+    });
   }
 }
