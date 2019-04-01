@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {UserDto} from '../../domain/UserDto';
+import {User} from '../../domain/User';
 import {UserServiceService} from '../../services/user/user-service.service';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material';
@@ -11,7 +11,7 @@ import {MatSnackBar} from '@angular/material';
 })
 export class RegisterComponent implements OnInit {
 
-  user: UserDto = new UserDto();
+  user: User = new User();
 
   constructor(private userService: UserServiceService, private router: Router, private snackbar: MatSnackBar) { }
 

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {UserDto} from '../../domain/UserDto';
+import {User} from '../../domain/User';
 import {AuthenticatorService} from '../../services/authentication/authenticator.service';
 import {UserServiceService} from '../../services/user/user-service.service';
 import {Tweet} from '../../domain/Tweet';
@@ -14,9 +14,9 @@ import {MatSnackBar} from "@angular/material";
 })
 export class ProfileComponent implements OnInit {
 
-  user: UserDto;
-  followers: UserDto[];
-  following: UserDto[];
+  user: User;
+  followers: User[];
+  following: User[];
   tweets: Tweet[];
   private selectedTab: number;
 

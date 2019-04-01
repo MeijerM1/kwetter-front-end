@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {UserDto} from '../../domain/UserDto';
+import {User} from '../../domain/User';
 import {HttpClient} from '@angular/common/http';
 import { Response } from '../../domain/Response';
 import { environment } from '../../../environments/environment';
@@ -10,13 +10,15 @@ import { environment } from '../../../environments/environment';
 export class AuthenticatorService {
 
   private loginUrl = environment.API_BASE + '/user/login';
-  public currentUser: UserDto;
+  public currentUser: User;
 
   constructor(private http: HttpClient) { }
 
   public login(username: string, password: string) {
     // @ts-ignore
-    const user: UserDto = new UserDto(username, password);
+    const user: User = new User();
+    user.username = username;
+    user.password = password;
 
     return this.http.post<Response>(this.loginUrl, user);
   }
@@ -37,12 +39,12 @@ export class AuthenticatorService {
     }
   }
 
-  public setCurrenUser(user: UserDto) {
+  public setCurrenUser(user: User) {
     localStorage.setItem('currentUser', JSON.stringify(user));
     this.currentUser = user;
   }
 
-  public getCurrentUser(): UserDto {
+  public getCurrentUser(): User {
     return JSON.parse(localStorage.getItem('currentUser'));
   }
 

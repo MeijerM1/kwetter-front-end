@@ -1,4 +1,4 @@
-export class UserDto {
+export class User {
   public uuid: string;
   public username: string;
   public avatarUrl: string;
@@ -7,14 +7,9 @@ export class UserDto {
   public websiteUrl: string;
   public password: string;
   public roleUuid: string;
-  public following: string[] = [];
+  public following: string[];
 
-  constructor();
-
-  constructor(username?: string, password?: string) {
-    this.username = username;
-    this.password = password;
-  }
+  constructor() {}
 
   public addFollower(id: string) {
     this.following.push(id);

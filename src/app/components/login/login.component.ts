@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {UserDto} from '../../domain/UserDto';
+import {User} from '../../domain/User';
 import {AuthenticatorService} from '../../services/authentication/authenticator.service';
 import {MatSnackBar} from '@angular/material';
 import {Router} from '@angular/router';
@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  user: UserDto = new UserDto();
+  private user: User = new User();
 
   constructor(private authService: AuthenticatorService, private snackBar: MatSnackBar, private router: Router) {
   }
@@ -26,9 +26,10 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    console.log(this.user);
     this.authService.login(this.user.username, this.user.password).subscribe(
       (response) => {
-        const user: UserDto = response.payload;
+        const user: User = response.payload;
         this.authService.setCurrenUser(user);
         this.router.navigateByUrl('/');
       },

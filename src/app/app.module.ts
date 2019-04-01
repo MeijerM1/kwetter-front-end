@@ -13,7 +13,10 @@ import {MatButtonModule,
     MatSnackBarModule,
     MatIconModule,
     MatTabsModule,
-    MatDialogModule} from '@angular/material';
+    MatDialogModule,
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatSelectModule} from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,6 +32,7 @@ import {LoggedInAuthAccess} from './router/LoggedInAuthAccess';
 import { UnauthComponent } from './components/unauth/unauth.component';
 import { TweetComponent } from './components/tweet/tweet.component';
 import { AdminComponent } from './components/admin/admin.component';
+import {RoleGuard} from "./router/RoleAuthAccess";
 
 @NgModule({
   declarations: [
@@ -61,10 +65,13 @@ import { AdminComponent } from './components/admin/admin.component';
     MatSnackBarModule,
     MatIconModule,
     MatTabsModule,
-    MatDialogModule
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatDialogModule,
+    MatSelectModule
   ],
   entryComponents: [TweetComponent],
-  providers: [LoggedInAuthAccess],
+  providers: [LoggedInAuthAccess, RoleGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,11 @@
+.user-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 30rem;
+}
+
+.user-item {
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+}

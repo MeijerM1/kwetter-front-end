@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserServiceService } from 'src/app/services/user/user-service.service';
-import {UserDto} from '../../domain/UserDto';
+import {User} from '../../domain/User';
 import {AuthenticatorService} from '../../services/authentication/authenticator.service';
 
 @Component({
@@ -10,7 +10,7 @@ import {AuthenticatorService} from '../../services/authentication/authenticator.
 })
 export class UserComponent implements OnInit {
 
-  private users: UserDto[];
+  private users: User[];
   private searchQuery: string;
 
   constructor(private userService: UserServiceService, private authService: AuthenticatorService) { }

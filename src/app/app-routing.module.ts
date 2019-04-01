@@ -9,6 +9,7 @@ import {ProfileComponent} from './components/profile/profile.component';
 import {LoggedInAuthAccess} from './router/LoggedInAuthAccess';
 import {UnauthComponent} from './components/unauth/unauth.component';
 import {AdminComponent} from "./components/admin/admin.component";
+import {RoleGuard} from "./router/RoleAuthAccess";
 
 const routes: Routes = [
   {
@@ -44,7 +45,10 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
-    canActivate: [LoggedInAuthAccess]
+    canActivate: [RoleGuard],
+    data: {
+      expectedRole: 'ADMIN'
+    }
   }
 ];
 

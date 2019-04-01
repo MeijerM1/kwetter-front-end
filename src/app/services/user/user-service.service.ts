@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { UserDto } from '../../domain/UserDto';
+import { User } from '../../domain/User';
 import { Response} from '../../domain/Response';
 import { environment } from '../../../environments/environment';
 
@@ -17,11 +17,11 @@ export class UserServiceService {
     return this.http.get<any>(this.baseUrl);
   }
 
-  public register(user: UserDto) {
+  public register(user: User) {
     return this.http.post(this.baseUrl, user);
   }
 
-  public update(user: UserDto) {
+  public update(user: User) {
     return this.http.put(`${this.baseUrl}/${user.uuid}`, user);
   }
 

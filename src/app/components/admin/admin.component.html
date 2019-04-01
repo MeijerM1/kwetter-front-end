@@ -1,3 +1,28 @@
-<p>
-  admin works!
-</p>
+<mat-tab-group mat-stretch-tabs>
+  <mat-tab label="Users">
+      <mat-card >
+        <mat-form-field class="search-field">
+          <input (input)="search()" [(ngModel)]='searchQuery' [ngModelOptions]="{standalone: true}" matInput
+                 placeholder="Search">
+        </mat-form-field>
+        <mat-divider></mat-divider>
+        <mat-list *ngFor="let user of users">
+          <mat-list-item class="user-item">
+            {{user.username}}
+            <button mat-button (click)="delete(user.uuid)">Delete</button>
+            <mat-form-field>
+              <mat-label>Role</mat-label>
+              <mat-select (selectionChange)="update(user.uuid)" [(ngModel)]="user.roleUuid">
+                <mat-option *ngFor="let role of roles" [value]="role.uuid">
+                  {{role.name | lowercase}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-divider></mat-divider>
+          </mat-list-item>
+        </mat-list>
+      </mat-card>
+  </mat-tab>
+  <mat-tab label="Tweets">
+  </mat-tab>
+</mat-tab-group>
