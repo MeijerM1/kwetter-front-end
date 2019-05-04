@@ -10,7 +10,7 @@ import {map} from 'rxjs/operators';
 })
 export class RoleService {
 
-  private baseUrl = `${environment.API_BASE}/role`;
+  private baseUrl = `${environment.API_BASE}/roles`;
 
   constructor(private http: HttpClient) {
   }

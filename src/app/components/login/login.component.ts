@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.user.username, this.user.password).subscribe(
       (response) => {
         const user: User = response.payload;
+        console.log(user);
         this.authService.setCurrenUser(user);
         this.router.navigateByUrl('/');
       },

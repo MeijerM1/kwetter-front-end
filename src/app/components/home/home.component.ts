@@ -21,9 +21,11 @@ export class HomeComponent implements OnInit, OnDestroy {
               private authService: AuthenticatorService) {
     if (this.authService.isAuthenticated()) {
       this.getTweets();
+/*
       this.tweetTimer = setInterval(() => {
         this.getTweets();
       }, 10000);
+*/
     }
   }
 

@@ -32,7 +32,8 @@ import {LoggedInAuthAccess} from './router/LoggedInAuthAccess';
 import { UnauthComponent } from './components/unauth/unauth.component';
 import { TweetComponent } from './components/tweet/tweet.component';
 import { AdminComponent } from './components/admin/admin.component';
-import {RoleGuard} from "./router/RoleAuthAccess";
+import {RoleGuard} from './router/RoleAuthAccess';
+import {httpInterceptorProviders} from './http-interceptors';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,11 @@ import {RoleGuard} from "./router/RoleAuthAccess";
     MatSelectModule
   ],
   entryComponents: [TweetComponent],
-  providers: [LoggedInAuthAccess, RoleGuard],
+  providers: [
+    LoggedInAuthAccess,
+    RoleGuard,
+    httpInterceptorProviders
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

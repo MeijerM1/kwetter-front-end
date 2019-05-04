@@ -9,7 +9,7 @@ import { environment } from '../../../environments/environment';
 })
 export class AuthenticatorService {
 
-  private loginUrl = environment.API_BASE + '/user/login';
+  private loginUrl = environment.API_BASE + '/users/login';
   public currentUser: User;
 
   constructor(private http: HttpClient) { }
@@ -51,5 +51,9 @@ export class AuthenticatorService {
   public logout() {
     localStorage.removeItem('currentUser');
     this.currentUser = undefined;
+  }
+
+  public getAuthToken(): string {
+    return this.currentUser.token;
   }
 }

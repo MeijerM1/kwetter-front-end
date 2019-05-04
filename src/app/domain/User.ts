@@ -8,6 +8,7 @@ export class User {
   public password: string;
   public roleUuid: string;
   public following: string[];
+  public token: string;
 
   constructor() {}
 
