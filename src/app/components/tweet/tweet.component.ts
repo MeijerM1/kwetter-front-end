@@ -3,6 +3,7 @@ import {Tweet} from "../../domain/Tweet";
 import {TweetService} from "../../services/tweet/tweet.service";
 import {AuthenticatorService} from "../../services/authentication/authenticator.service";
 import {MAT_DIALOG_DATA, MatDialogRef, MatSnackBar} from "@angular/material";
+import {WebsocketService} from '../../services/websocket/websocket.service';
 
 @Component({
   selector: 'app-tweet',
@@ -16,7 +17,7 @@ export class TweetComponent  {
   constructor(public dialogRef: MatDialogRef<TweetComponent>,
               private tweetService: TweetService,
               private authService: AuthenticatorService,
-              private snackbar: MatSnackBar) {
+              private snackbar: MatSnackBar ) {
     this.tweet.authorUuid = this.authService.currentUser.uuid;
   }
 

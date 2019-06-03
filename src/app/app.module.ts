@@ -34,6 +34,8 @@ import { TweetComponent } from './components/tweet/tweet.component';
 import { AdminComponent } from './components/admin/admin.component';
 import {RoleGuard} from './router/RoleAuthAccess';
 import {httpInterceptorProviders} from './http-interceptors';
+import {InjectableRxStompConfig, RxStompService, rxStompServiceFactory} from '@stomp/ng2-stompjs';
+import {myRxStompConfig} from './rx-stomp-config';
 
 @NgModule({
   declarations: [
@@ -75,7 +77,16 @@ import {httpInterceptorProviders} from './http-interceptors';
   providers: [
     LoggedInAuthAccess,
     RoleGuard,
-    httpInterceptorProviders
+    httpInterceptorProviders,
+    {
+      provide: InjectableRxStompConfig,
+      useValue: myRxStompConfig
+    },
+    {
+      provide: RxStompService,
+      useFactory: rxStompServiceFactory,
+      deps: [InjectableRxStompConfig]
+    }
   ],
   bootstrap: [AppComponent]
 })

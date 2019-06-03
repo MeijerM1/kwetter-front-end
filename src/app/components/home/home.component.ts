@@ -3,7 +3,8 @@ import {Router} from '@angular/router';
 import {TweetService} from '../../services/tweet/tweet.service';
 import {AuthenticatorService} from '../../services/authentication/authenticator.service';
 import {Tweet} from '../../domain/Tweet';
-import {Observable} from 'rxjs';
+import {WebsocketService} from '../../services/websocket/websocket.service';
+import {RxStompService, StompHeaders} from '@stomp/ng2-stompjs';
 
 @Component({
   selector: 'app-home',
@@ -18,19 +19,31 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   constructor(private router: Router,
               private tweetService: TweetService,
-              private authService: AuthenticatorService) {
+              private authService: AuthenticatorService,
+              private socket: WebsocketService,
+              private rxStompService: RxStompService) {
     if (this.authService.isAuthenticated()) {
       this.getTweets();
-/*
-      this.tweetTimer = setInterval(() => {
-        this.getTweets();
-      }, 10000);
-*/
+
+      this.rxStompService.watch(`/user/queue/test`)
+        .subscribe((message: any) => {
+          console.log(message);
+        });
+
+      // this.rxStompService.stompClient.subscribe('/user/queue/tweets', (message) => {
+      //   console.log(message);
+      // });
+
+      this.rxStompService.publish({destination: '/app/tweets', body: this.authService.getCurrentUser().uuid});
+
+
     }
   }
 
   ngOnInit() {
+
   }
+
   ngOnDestroy() {
     if (this.tweetTimer) {
       clearInterval(this.tweetTimer);

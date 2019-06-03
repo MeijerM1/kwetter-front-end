@@ -32,11 +32,8 @@ export class AuthenticatorService {
   }
 
   public isAuthenticated(): boolean {
-    if (!localStorage.getItem('currentUser')) {
-      return false;
-    } else {
-      return true;
-    }
+    const user = localStorage.getItem('currentUser');
+    return user !== null;
   }
 
   public setCurrenUser(user: User) {
