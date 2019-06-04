@@ -5,6 +5,7 @@ import {AuthenticatorService} from '../../services/authentication/authenticator.
 import {Tweet} from '../../domain/Tweet';
 import {WebsocketService} from '../../services/websocket/websocket.service';
 import {RxStompService, StompHeaders} from '@stomp/ng2-stompjs';
+import {Stomp} from '@stomp/stompjs';
 
 @Component({
   selector: 'app-home',
@@ -19,22 +20,32 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   constructor(private router: Router,
               private tweetService: TweetService,
-              private authService: AuthenticatorService,
-              private socket: WebsocketService,
-              private rxStompService: RxStompService) {
+              private authService: AuthenticatorService) {
     if (this.authService.isAuthenticated()) {
       this.getTweets();
 
-      this.rxStompService.watch(`/user/queue/test`)
-        .subscribe((message: any) => {
-          console.log(message);
-        });
+      const sock = new SockJS('http://localhost:8080/tweets');
+      const stompClient = Stomp.over(sock);
 
-      // this.rxStompService.stompClient.subscribe('/user/queue/tweets', (message) => {
-      //   console.log(message);
-      // });
+      let sessionId = '';
+      const user = this.authService.getCurrentUser().username;
 
-      this.rxStompService.publish({destination: '/app/tweets', body: this.authService.getCurrentUser().uuid});
+      stompClient.connect({}, function(frame) {
+        let url = stompClient.ws._transport.url;
+        url = url.replace(
+          'ws://localhost:8080/tweets',  '');
+        url = url.replace('/websocket', '');
+        url = url.replace(/^[0-9]+\//, '');
+        url = url.substring(url.indexOf('/', 2));
+        console.log('Your current session is: ' + url);
+        sessionId = url;
+
+        stompClient.subscribe(`/user${sessionId}/queue/tweets`, (data) => {
+          console.log(data);
+        }, { testHeader: sessionId});
+
+        stompClient.send('/app/tweets', {}, user);
+      });
 
 
     }
