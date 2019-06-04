@@ -28,20 +28,22 @@ export class HomeComponent implements OnInit, OnDestroy {
       const stompClient = Stomp.over(sock);
 
       let sessionId = '';
-      const user = this.authService.getCurrentUser().username;
+      const user = this.authService.getCurrentUser().uuid;
 
-      stompClient.connect({}, function(frame) {
+      stompClient.connect({}, (frame) => {
         let url = stompClient.ws._transport.url;
         url = url.replace(
           'ws://localhost:8080/tweets',  '');
         url = url.replace('/websocket', '');
         url = url.replace(/^[0-9]+\//, '');
         url = url.substring(url.indexOf('/', 2));
-        console.log('Your current session is: ' + url);
+        console.log('Session: ' + url);
         sessionId = url;
 
         stompClient.subscribe(`/user${sessionId}/queue/tweets`, (data) => {
           console.log(data);
+          const tweet = JSON.parse(data.body);
+          this.tweets.unshift(tweet);
         }, { testHeader: sessionId});
 
         stompClient.send('/app/tweets', {}, user);
