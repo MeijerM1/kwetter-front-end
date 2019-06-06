@@ -10,7 +10,7 @@
 </div>
 <div *ngIf="authService.isAuthenticated() else noAccount">
   <h3>Your timeline</h3>
-  <div *ngIf="tweets">
+  <div *ngIf="tweets && favoriteService.favorites !== null else loading">
     <mat-card class="tweet-card" *ngFor="let tweet of tweets">
       <mat-card-subtitle>
         Getweet door: {{tweet.authorUuid}}
@@ -19,12 +19,17 @@
         <p>{{tweet.content}}</p>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-button>LIKE</button>
-        <button mat-button>SHARE</button>
+        <button (click)="addFavorite(tweet.uuid)" mat-icon-button>
+          <mat-icon *ngIf="!favoriteService.isFavorite(tweet.uuid)">favorite_border</mat-icon>
+          <mat-icon *ngIf="favoriteService.isFavorite(tweet.uuid)">favorite</mat-icon>
+        </button>
       </mat-card-actions>
     </mat-card>
   </div>
 </div>
 <ng-template #noAccount>
   <h3>You're currently not logged in, log in to see your timeline</h3>
+</ng-template>
+<ng-template #loading>
+  <mat-spinner></mat-spinner>
 </ng-template>

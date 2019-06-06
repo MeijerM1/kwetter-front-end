@@ -16,6 +16,7 @@ import {MatButtonModule,
     MatDialogModule,
     MatSliderModule,
     MatSlideToggleModule,
+    MatProgressSpinnerModule,
     MatSelectModule} from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -71,7 +72,8 @@ import {myRxStompConfig} from './rx-stomp-config';
     MatSliderModule,
     MatSlideToggleModule,
     MatDialogModule,
-    MatSelectModule
+    MatSelectModule,
+    MatProgressSpinnerModule
   ],
   entryComponents: [TweetComponent],
   providers: [

@@ -3,9 +3,8 @@ import {Router} from '@angular/router';
 import {TweetService} from '../../services/tweet/tweet.service';
 import {AuthenticatorService} from '../../services/authentication/authenticator.service';
 import {Tweet} from '../../domain/Tweet';
-import {WebsocketService} from '../../services/websocket/websocket.service';
-import {RxStompService, StompHeaders} from '@stomp/ng2-stompjs';
 import {Stomp} from '@stomp/stompjs';
+import {FavoriteService} from '../../services/favorite/favorite.service';
 
 @Component({
   selector: 'app-home',
@@ -20,10 +19,12 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   constructor(private router: Router,
               private tweetService: TweetService,
-              private authService: AuthenticatorService) {
+              private authService: AuthenticatorService,
+              private favoriteService: FavoriteService) {
     if (this.authService.isAuthenticated()) {
       this.getTweets();
 
+      // @ts-ignore
       const sock = new SockJS('http://localhost:8080/tweets');
       const stompClient = Stomp.over(sock);
 
@@ -64,6 +65,17 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   private getTweets() {
+    this.favoriteService.getFavorites(this.authService.getCurrentUser().uuid).subscribe((response) => {
+      console.log(response);
+      if (response === null) {
+        this.favoriteService.favorites = [];
+      } else {
+        this.favoriteService.favorites = response;
+      }
+
+      console.log(this.favoriteService.favorites);
+    });
+
     this.tweetService.getUserTimeline(this.authService.getCurrentUser().uuid).subscribe((response) => {
       console.log(response.payload);
       this.tweets = response.payload;
@@ -72,5 +84,11 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public search() {
     this.router.navigateByUrl('/search/' + this.searchQuery);
+  }
+
+  addFavorite(tweetId: string) {
+    this.favoriteService.addFavorite(this.authService.currentUser.uuid, tweetId).subscribe((response) => {
+      this.favoriteService.favorites.push(tweetId);
+    }, err => console.log(err));
   }
 }
