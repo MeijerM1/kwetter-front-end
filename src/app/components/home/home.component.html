@@ -19,9 +19,8 @@
         <p>{{tweet.content}}</p>
       </mat-card-content>
       <mat-card-actions>
-        <button (click)="addFavorite(tweet.uuid)" mat-icon-button>
-          <mat-icon *ngIf="!favoriteService.isFavorite(tweet.uuid)">favorite_border</mat-icon>
-          <mat-icon *ngIf="favoriteService.isFavorite(tweet.uuid)">favorite</mat-icon>
+        <button (click)="changeFavorite(tweet.uuid)" mat-icon-button>
+          <mat-icon> {{ favoriteService.isFavorite(tweet.uuid) ? 'favorite' : 'favorite_border'}}</mat-icon>
         </button>
       </mat-card-actions>
     </mat-card>

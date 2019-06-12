@@ -73,7 +73,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.favoriteService.favorites = response;
       }
 
-      console.log(this.favoriteService.favorites);
     });
 
     this.tweetService.getUserTimeline(this.authService.getCurrentUser().uuid).subscribe((response) => {
@@ -90,5 +89,19 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.favoriteService.addFavorite(this.authService.currentUser.uuid, tweetId).subscribe((response) => {
       this.favoriteService.favorites.push(tweetId);
     }, err => console.log(err));
+  }
+
+  removeFavorite(tweetId: string) {
+    this.favoriteService.removeFavorite(this.authService.currentUser.uuid, tweetId).subscribe((response) => {
+      this.favoriteService.favorites.splice(this.favoriteService.favorites.indexOf(tweetId), 1);
+    }, err => console.log(err));
+  }
+
+  changeFavorite(tweetId: string) {
+    if (this.favoriteService.isFavorite(tweetId)) {
+      this.removeFavorite(tweetId);
+    } else {
+      this.addFavorite(tweetId);
+    }
   }
 }

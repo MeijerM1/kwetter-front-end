@@ -6,6 +6,7 @@ import {Tweet} from '../../domain/Tweet';
 import {TweetService} from '../../services/tweet/tweet.service';
 import {ActivatedRoute} from '@angular/router';
 import {MatSnackBar} from "@angular/material";
+import {FavoriteService} from "../../services/favorite/favorite.service";
 
 @Component({
   selector: 'app-profile',
@@ -24,6 +25,7 @@ export class ProfileComponent implements OnInit {
               private authService: AuthenticatorService,
               private userService: UserServiceService,
               private tweetService: TweetService,
+              private favoriteService: FavoriteService,
               private snackbar: MatSnackBar) {
   }
 

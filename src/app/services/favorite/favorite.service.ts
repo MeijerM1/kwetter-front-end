@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {AuthenticatorService} from '../authentication/authenticator.service';
 
@@ -28,7 +28,25 @@ export class FavoriteService {
     return this.http.get<string[]>(this.baseUrl + '/favorites', { params: param });
   }
 
+  public removeFavorite(userId: string, tweetId: string) {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: {
+        user: userId,
+        tweet: tweetId
+      },
+    };
+
+    return this.http.delete(this.baseUrl + '/removeFavorite', options);
+  }
+
   public isFavorite(tweet: string): boolean {
+    if (!this.favorites) {
+      return false;
+    }
+
     return this.favorites.indexOf(tweet) !== -1;
   }
 }

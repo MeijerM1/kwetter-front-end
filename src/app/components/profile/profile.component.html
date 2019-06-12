@@ -62,12 +62,16 @@
   <mat-tab label="Tweets">
     <div *ngIf="tweets">
       <mat-card class="tweet-card" *ngFor="let tweet of tweets">
+        <mat-card-subtitle>
+          Getweet door: {{tweet.authorUuid}}
+        </mat-card-subtitle>
         <mat-card-content>
           <p>{{tweet.content}}</p>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-button>LIKE</button>
-          <button mat-button>SHARE</button>
+          <button (click)="changeFavorite(tweet.uuid)" mat-icon-button>
+            <mat-icon> {{ favoriteService.isFavorite(tweet.uuid) ? 'favorite' : 'favorite_border'}}</mat-icon>
+          </button>
         </mat-card-actions>
       </mat-card>
     </div>
