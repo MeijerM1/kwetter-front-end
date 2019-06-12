@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserServiceService } from 'src/app/services/user/user-service.service';
 import {User} from '../../domain/User';
 import {AuthenticatorService} from '../../services/authentication/authenticator.service';
+import {MatSnackBar} from "@angular/material";
 
 @Component({
   selector: 'app-user',
@@ -13,14 +14,21 @@ export class UserComponent implements OnInit {
   private users: User[];
   private searchQuery: string;
 
-  constructor(private userService: UserServiceService, private authService: AuthenticatorService) { }
+  constructor(private userService: UserServiceService,
+              private authService: AuthenticatorService,
+              private snackbar: MatSnackBar) { }
 
   ngOnInit() {
   }
 
   followUser(id: string) {
     this.authService.currentUser.following.push(id);
-    this.userService.update(this.authService.currentUser).subscribe();
+    this.userService.update(this.authService.currentUser).subscribe((response: User) => {
+      this.authService.setCurrenUser(response);
+      this.snackbar.open('Success', 'dismiss', {
+        duration: 2000
+      });
+    });
   }
 
   public search() {
@@ -31,7 +39,12 @@ export class UserComponent implements OnInit {
 
     this.userService.search(this.searchQuery).subscribe((response) => {
       this.users = response.payload;
+      this.users = this.users.filter((user) => this.notCUrrentUser(user));
     });
+  }
+
+  private notCUrrentUser(value) {
+    return value.uuid !== this.authService.currentUser.uuid;
   }
 
 }
