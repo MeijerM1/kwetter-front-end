@@ -12,17 +12,28 @@ import {MatSnackBar} from "@angular/material";
 export class UserComponent implements OnInit {
 
   private users: User[];
-  private searchQuery: string;
+  private searchQuery = 'user';
 
   constructor(private userService: UserServiceService,
               private authService: AuthenticatorService,
               private snackbar: MatSnackBar) { }
 
   ngOnInit() {
+    this.search();
   }
 
   followUser(id: string) {
     this.authService.currentUser.following.push(id);
+    this.userService.update(this.authService.currentUser).subscribe((response: User) => {
+      this.authService.setCurrenUser(response);
+      this.snackbar.open('Success', 'dismiss', {
+        duration: 2000
+      });
+    });
+  }
+
+  unfollowUser(id: string) {
+    this.authService.currentUser.following.splice(this.authService.currentUser.following.indexOf(id), 1);
     this.userService.update(this.authService.currentUser).subscribe((response: User) => {
       this.authService.setCurrenUser(response);
       this.snackbar.open('Success', 'dismiss', {

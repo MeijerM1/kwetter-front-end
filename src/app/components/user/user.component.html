@@ -22,7 +22,7 @@
         <div class="action-button-container">
           <a mat-stroked-button routerLink="/profile/{{user.uuid}}">Profile</a>
           <a *ngIf="authService.currentUser.following.indexOf(user.uuid) === -1" mat-stroked-button (click)="followUser(user.uuid)"> Follow</a>
-          <a *ngIf="authService.currentUser.following.indexOf(user.uuid) !== -1" mat-stroked-button (click)="followUser(user.uuid)"> Unfollow</a>
+          <a *ngIf="authService.currentUser.following.indexOf(user.uuid) !== -1" mat-stroked-button (click)="unfollowUser(user.uuid)"> Unfollow</a>
         </div>
       </mat-list-item>
     </mat-list>
